@@ -47,6 +47,40 @@
         }
     </style>
 </head>
+<div id="login-overlay" class="fixed inset-0 z-[100] bg-slate-900 flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm text-center border-t-4 border-ustaBlue">
+        <h2 class="text-2xl font-bold text-slate-800 mb-2">Acceso Restringido</h2>
+        <p class="text-slate-600 mb-6 text-sm">Por favor, ingresa la contraseña para continuar.</p>
+        
+        <input type="password" id="password-input" placeholder="Introduce tu contraseña" 
+               class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
+        
+        <button onclick="verificarContraseña()" 
+                class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">
+            Ingresar
+        </button>
+        <p id="error-msg" class="text-rose-500 text-xs mt-4 hidden">Contraseña incorrecta, intenta de nuevo.</p>
+    </div>
+</div>
+
+<script>
+    function verificarContraseña() {
+        const input = document.getElementById('password-input').value;
+        const contraseñasValidas = ["yahahermosa", "industrial2026"];
+        const overlay = document.getElementById('login-overlay');
+        const errorMsg = document.getElementById('error-msg');
+
+        if (contraseñasValidas.includes(input)) {
+            // Si es correcta, quitamos la capa con una animación suave
+            overlay.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            setTimeout(() => overlay.remove(), 500);
+        } else {
+            // Si es incorrecta, mostramos mensaje de error
+            errorMsg.classList.remove('hidden');
+            document.getElementById('password-input').value = ""; // Limpiar campo
+        }
+    }
+</script>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
     <!-- Header Principal -->
     <header class="bg-ustaBlue text-white shadow-md border-b-4 border-ustaGold">
